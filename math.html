@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript">
+		$(function () {
+		    var chartItem;
+
+		    $.getJSON("data.php", function(json) {
+				var len = json.length;
+				for(var i = 0; i < len; i++){
+			    
+					var chart;
+					var options;
+			    	options = {
+		        	    chart: {
+		        	        renderTo: '',
+		        	        type: 'line',
+		        	        marginRight: 130,
+		        	        marginBottom: 25
+		        	    },
+		        	    title: {
+							text: json[i][0]['test_case_name'],
+		        	        x: -20 //center
+		        	    },
+		        	    xAxis: {
+		        	        categories: json[i][1]["changelist"]
+		        	    },
+		        	    yAxis: {
+		        	        title: {
+		        	            text: 'Cycles'
+		        	        },
+		        	        plotLines: [{
+		        	            value: 0,
+		        	            width: 1,
+		        	            color: '#808080'
+		        	        }]
+		        	    },
+		        	    tooltip: {
+		        	        formatter: function() {
+		        	                return '<b>'+ this.series.name +'</b><br/>'+
+		        	                this.x +': '+ this.y;
+		        	        }
+		        	    },
+						credits:{
+						     enabled:false
+						},
+		        	    legend: {
+		        	        layout: 'vertical',
+		        	        align: 'right',
+		        	        verticalAlign: 'top',
+		        	        x: -10,
+		        	        y: 100,
+		        	        borderWidth: 0
+		        	    },
+		        	    series: [ json[i][2], json[i][3] ]
+		        	};
+					var j = i+1;
+					$("#content").append("<div id='container" + j + "'></div>");
+					options.chart.renderTo = "container" + j; 
+					chart = new Highcharts.Chart(options);
+				}
+		    });
+		});
+		</script>
+	</head>
+	<body>
+	  	<script src="http://code.highcharts.com/highcharts.js"></script>
+	  	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+		<div id="content"></div>	
+	
+	</body>
+</html>
