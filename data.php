@@ -1,6 +1,6 @@
 <?php
 	
-	$con = mysql_connect('10.204.5.211', 'root', 'fengxi');
+	$con = mysql_connect('10.204.5.211', 'root', '******');
 	mysql_select_db("di", $con);
 
 	//Get the test_case_name in a specified table
