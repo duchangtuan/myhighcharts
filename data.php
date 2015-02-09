@@ -41,34 +41,7 @@
 		array_push($result_array, $test_info);
 	}
 	print json_encode($result_array);
-	#########print json_encode($result_array[0]);
-	/*
-	$sql = "SELECT changelist, min_value, avg_value from arm_int_fft_bench_test where test_case_name='DLB_CLfft_unscaledCLU_40'";
-	$result = mysql_query($sql, $con);
-	
-	$rows = array();
-	$rows['name'] = 'min_value';
-	$rows1 = array();
-	$rows1['name'] = 'avg_value';
-	
-	while($r = mysql_fetch_array($result))
-	{
-		$rows['data'][] = intval($r['min_value']);
-		$rows1['data'][] = intval($r['avg_value']);
-	    $changelist['changelist'][] = $r['changelist'];
-	}
-	
-	$result = array();
-	array_push($result, $rows);
-	array_push($result, $rows1);
-	array_push($result, $changelist);
-	
-	#print $changelist = json_encode($changelist);
-		
-    $changelist = json_encode($changelist);
-	$result = json_encode($result);
-	print $result;
-	*/
+
 	mysql_close($con);
 
 ?>
