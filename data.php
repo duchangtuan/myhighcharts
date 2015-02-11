@@ -40,19 +40,11 @@
                 for($j=0; $j<$len; $j++){
                         $sql = "SELECT changelist, min_value, avg_value from "."$table_name "." where test_case_name="."'".$test_case[$i]."'"." and changelist="."'".$changelist[$j]."'";
                         $result = mysql_query($sql, $con);
-                        //$changelist = array();
                         $r = mysql_fetch_array($result);
                         $rows['data'][] = intval($r['min_value']);
                         $rows1['data'][] = intval($r['avg_value']);
-                        //while($r = mysql_fetch_array($result))
-                        //{
-                        //      $rows['data'][] = intval($r['min_value']);
-                        //      $rows1['data'][] = intval($r['avg_value']);
-                        //    //$changelist['changelist'][] = $r['changelist'];
-                        //}
                 }
                 $test_case_name['test_case_name'] = $test_case[$i];
-                #print_r($rows);
                 $test_info = array();
                 array_push($test_info, $test_case_name);
                 array_push($test_info, $changelist);
