@@ -47,11 +47,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index4.html"> Home </a>
+            <a class="navbar-brand" href="index.html"> Xfeng </a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#ad-carousel">xfeng</a></li>
+                <li class="active"><a href="index.html">Home</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> fft <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
@@ -242,17 +242,22 @@
             </div>
         </div>
 
-       
-        <div id="list">
-            <form action="" method="post" >
-				<select id="algorithm" name="algorithm"></select>
-        		<span id="api_poss"></span>
-        		<span id="changelist_poss"></span>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<form action="" method="post" >
+						<select id="algorithm" name="algorithm"></select>
+						<span id="api_poss"></span>
+						<span id="changelist_poss"></span>
+					</form>
+				</div>
+				<div class="col-md-3">
+                    <input id="Button1" type="button" value="submit" onclick="submit()" />
+				</div>
+			</div>
+		</div>
 
-			</form>
-           <input id="Button1" type="button" value="button" onclick="submit()" />
-
-        </div>
         
         <div class="modal fade" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label"
          aria-hidden="true">
@@ -264,7 +269,7 @@
                     <h4 class="modal-title" id="modal-label">About</h4>
                 </div>
                 <div class="modal-body">
-                    <p>This is xfeng's first web experiment</p>
+                    <p>This is xfeng's first web experiment.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">I see</button>
