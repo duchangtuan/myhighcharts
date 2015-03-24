@@ -334,7 +334,7 @@
                         var option = "<option selected>Changelist</option><option value='"+k+"'>"+k+"</option>";
                         $("#changelist").append(option);
                     }else{
-                        var option = "<option value='>"+k+"'>"+k+"</option>";
+                        var option = "<option value='"+k+"'>"+k+"</option>";
                         $("#changelist").append(option);
                     }
                 })
@@ -358,18 +358,19 @@
             $.ajax({
                 url: "php/response.php?temp" + Math.random(),
                 type: "POST",
-                data: { algorithm: $("#algorithm").val(), api: $("#api").val() },
+                data: { algorithm: $("#algorithm").val(), api: $("#api").val(), changelist: $("#changelist").val() },
                 dataType: "json",
-                success: function (json, textStatus) {
+                success: function (data, textStatus) {
+                    //alert(data[0]["data"]);
                     $('#container_').highcharts({
                        chart: {
                            type: 'column'
                        },
                        title: {
-                           text: json['test_case_name']
+                           text: data['test_case_name']
                        },
                        xAxis: {
-                           categories: json['backend']
+                           categories: data['backend']
                        },
                        credits:{
                                     enabled:false
@@ -397,7 +398,7 @@
                                borderWidth: 0
                            }
                        },
-                       series: [ json['0'], json['1']]
+                       series: [ data['0'], data['1']]
                        });
                 },
 
