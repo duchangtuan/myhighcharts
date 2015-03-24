@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>xfeng</title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/xfeng.ico"/>
     <script src="//code.jquery.com/jquery-1.11.1.js"></script>
     <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
     <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
@@ -30,6 +31,9 @@
             .carousel .item img {
                 width: 100%;
             }
+	.Button1{
+		color:#2a6496;
+	}
     </style>
 
     
@@ -280,6 +284,10 @@
 
 
     <div id="container_" style="min-width:700px;height:400px"></div>
+	<hr class="divider">
+	<footer>
+		<p>Xfeng©2015 </p>
+	</footer>
 	<script type="text/javascript">
         function Algorithm_list(){
             $.getJSON("php/get_algorithm.php",  function(json){
