@@ -6,12 +6,11 @@
 	<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/4.0.3/highcharts.js"></script>
 	<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/4.0.3/modules/exporting.js"></script>
-    <title>profiling</title>
+    <title>xfeng</title>
 	
     <script type="text/javascript">
         var n = 0;
-        //var winHeight = $(window).height();
-		//alert(winHeight);
+		var pageNum = 20;
         $(function () {
             loading();
 			
@@ -56,13 +55,17 @@
             });
         });
         function loading() {
-			var i = 20*n;
+			var i = pageNum*n;
 			$.getJSON("get_data.php", {platform:'arm_float',algorithm:'fft'}, function (data){
-               	if (n==6){
-					var end = (n+1)*20 + 4;
+				var len = data.length
+				var remainder = len % pageNum;
+				var quotient = Math.floor(len/pageNum);
+               	if (n+1==quotient){
+					var end = (n+1)*pageNum + 4;
 				} else{
-					var end = (n+1)*20;
+					var end = (n+1)*pageNum;
 				}
+				alert(end);
 				for (; i < end; i++) {
 					var chart;
 					var options;
