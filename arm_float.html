@@ -1,142 +1,143 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
-	<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/4.0.3/highcharts.js"></script>
-	<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/4.0.3/modules/exporting.js"></script>
-    <title>xfeng</title>
-	
-    <script type="text/javascript">
-        var n = 0;
-		var pageNum = 20;
-        $(function () {
-            loading();
-			
-            $(window).scroll(function () {
-				//alert(n);	
-				/*
-                if (n < 7) {
-                    var docTop = $(document).scrollTop();
-                    var contentHeight = $("#content").height();
-					//alert(docTop);
-					//alert(contentHeight);
-                    if (docTop + winHeight >= contentHeight) {
-                        loading();
-                    }
-                }
-				*/
-				if(n < 7){
-					if(Math.ceil($(window).scrollTop()) == $(document).height() - $(window).height()){
-						loading();
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/4.0.3/highcharts.js"></script>
+		<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/4.0.3/modules/exporting.js"></script>
+		<title>profiling</title>
+		
+		<script type="text/javascript">
+			var n = 0;
+			var pageNum = 20;
+			$(function () {
+				loading();
+				$(window).scroll(function () {
+					/*
+					if (n < 7) {
+						var docTop = $(document).scrollTop();
+						var contentHeight = $("#content").height();
+						//alert(docTop);
+						//alert(contentHeight);
+						if (docTop + winHeight >= contentHeight) {
+							loading();
+						}
 					}
-				}	
-				/*
-				if (n < 14){
-					var pageH = $(document.body).height();
-					var scrollT = $(window).scrollTop();
-					var aa = (pageH - winHeight - scrollT) / winHeight;
-					if (aa < 0.02){
-						loading()
+					*/
+					if(n < 7){
+						var scrollT = $(window).scrollTop();
+						var pageH = $(document).height();
+						var winH = $(window).height();
+						//if(Math.ceil(scrollT) == pageH - winH || Math.floor(scrollT) == pageH - winH){
+						if(Math.abs(pageH - winH - scrollT) < 10){
+							loading();
+						}
+					}	
+					/*
+					if (n < 14){
+						var pageH = $(document.body).height();
+						var scrollT = $(window).scrollTop();
+						var aa = (pageH - winHeight - scrollT) / winHeight;
+						if (aa < 0.02){
+							loading()
+						}
 					}
-				}
-				*/
-				/*
-				if (n < 14){
-					var fold = $(window).height() + $(window).scrollTop();
-                    //alert(fold);
-                    //alert($('#content').offset().top);
-					if(fold >= $('#content').offset().top){
-						loading();
+					*/
+					/*
+					if (n < 14){
+						var fold = $(window).height() + $(window).scrollTop();
+						//alert(fold);
+						//alert($('#content').offset().top);
+						if(fold >= $('#content').offset().top){
+							loading();
+						}
 					}
-				}
-				*/
-            });
-        });
-        function loading() {
-			var i = pageNum*n;
-			$.getJSON("get_data.php", {platform:'arm_float',algorithm:'fft'}, function (data){
-				var len = data.length
-				var remainder = len % pageNum;
-				var quotient = Math.floor(len/pageNum);
-               	if (n+1==quotient){
-					var end = (n+1)*pageNum + 4;
-				} else{
-					var end = (n+1)*pageNum;
-				}
-				alert(end);
-				for (; i < end; i++) {
-					var chart;
-					var options;
-					options = {
-						chart: {
-							renderTo: '',
-							type: 'line',
-							marginRight: 130,
-							marginBottom: 25
-						},
-						title: {
-							text: '',
-							x: -20 //center
-						},
-						xAxis: {
-							categories: data[i][1],
-							plotLines:[{
-								color:'red',
-								dashStyle:'longdashdot',
-								value:3,
-								width:2
-							}]
-						},
-						yAxis: {
-							title: {
-								text: 'Cycles'
-							},
-							plotLines: [{
-								value: 0,
-								width: 1,
-								color: '#808080'
-							}]
-						},
-						tooltip: {
-							formatter: function() {
-									return '<b>'+ this.series.name +'</b><br/>'+
-									this.x +': '+ this.y;
-							}
-						},
-						credits:{
-							 enabled:false
-						},
-						legend: {
-							layout: 'vertical',
-							align: 'right',
-							verticalAlign: 'top',
-							x: -10,
-							y: 100,
-							borderWidth: 0,
-							floating: true,
-							//draggable: true,
-							zIndex: 20
-						},
-						series: [ data[i][2], data[i][3] ]
-					};
-					var j = i;
-					$("#content").append("<h4 class='text-center'>" + data[i][0]['test_case_name'] + "</h4>")
-					$("#content").append("<div id='container" + j + "'></div><br>");
-					options.chart.renderTo = "container" + j; 
-					chart = new Highcharts.Chart(options);
-				}
-				n += 1;
+					*/
+				});
 			});
-        }
-    </script>
-</head>
-<body>
-    <h1 class="text-center">Panda Float FFT</h1>
-		<br>
-		<br>
-		<br>
-		<div id="content" ></div>
-</body>
+			function loading() {
+				var i = pageNum*n;
+				$.getJSON("get_data.php", {platform:'arm_float',algorithm:'fft'}, function (data){
+					var len = data.length
+					var remainder = len % pageNum;
+					var quotient = Math.floor(len/pageNum);
+					if (n+1==quotient){
+						var end = (n+1)*pageNum + 4;
+					} else{
+						var end = (n+1)*pageNum;
+					}
+					for (; i < end; i++) {
+						var chart;
+						var options;
+						options = {
+							chart: {
+								renderTo: '',
+								type: 'line',
+								marginRight: 130,
+								marginBottom: 25
+							},
+							title: {
+								text: '',
+								x: -20 //center
+							},
+							xAxis: {
+								categories: data[i][1],
+								plotLines:[{
+									color:'red',
+									dashStyle:'longdashdot',
+									value:3,
+									width:2
+								}]
+							},
+							yAxis: {
+								title: {
+									text: 'Cycles'
+								},
+								plotLines: [{
+									value: 0,
+									width: 1,
+									color: '#808080'
+								}]
+							},
+							tooltip: {
+								formatter: function() {
+										return '<b>'+ this.series.name +'</b><br/>'+
+										this.x +': '+ this.y;
+								}
+							},
+							credits:{
+								 enabled:false
+							},
+							legend: {
+								layout: 'vertical',
+								align: 'right',
+								verticalAlign: 'top',
+								x: -10,
+								y: 100,
+								borderWidth: 0,
+								floating: true,
+								//draggable: true,
+								zIndex: 20
+							},
+							series: [ data[i][2], data[i][3] ]
+						};
+						var j = i;
+						$("#content").append("<h4 class='text-center'>" + data[i][0]['test_case_name'] + "</h4>")
+						$("#content").append("<div id='container" + j + "'></div><br>");
+						options.chart.renderTo = "container" + j; 
+						chart = new Highcharts.Chart(options);
+					}
+					n += 1;
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<h1 class="text-center">Panda Float FFT</h1>
+			<br>
+			<br>
+			<br>
+			<div id="content" ></div>
+	</body>
 </html>
